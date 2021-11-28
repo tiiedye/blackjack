@@ -34,7 +34,7 @@ def calculate_score(hand):
 
 print(logo)
 print("RULES:")
-print("1. The deck is unlimited in size.\n 2. There are no jokers.\n 3. The Jack/Queen/King all count as 10.\n 4. The "
+print(" 1. The deck is unlimited in size.\n 2. There are no jokers.\n 3. The Jack/Queen/King all count as 10.\n 4. The "
       "the Ace can count as 11 or 1.\n 5. Cards marked X are face down\n")
 
 user_cards = []
