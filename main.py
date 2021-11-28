@@ -1,14 +1,4 @@
-# Blackjack Project - Our Blackjack House Rules
-
-# The deck is unlimited in size.
-# There are no jokers.
-# The Jack/Queen/King all count as 10.
-# The the Ace can count as 11 or 1.
-# Use the following list as the deck of cards:
-# cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-# The cards in the list have equal probability of being drawn.
-# Cards are not removed from the deck as they are drawn.
-# The computer is the dealer.
+# Blackjack Project
 
 import random
 from art import logo
@@ -54,42 +44,50 @@ dealer_cards.append(deal_card())
 dealer_cards.append(deal_card())
 
 user_score = calculate_score(user_cards)
-print("Your cards:")
-print(f"{user_cards}")
-print(f"Your total: {user_score}\n")
-
-print("Dealer's cards:")
-print(f"[ {dealer_cards[0]}, X ]")
-
 hit_or_pass = "h"
-while hit_or_pass == 'h':
-    hit_or_pass = input("Would you like to Hit [H] or Pass [P]?: ").lower()
-    if hit_or_pass == 'h':
-        user_cards.append(deal_card())
-    elif hit_or_pass != 'h' and hit_or_pass != 'p':
-        print("Invalid input, pass assumed.")
 
-    user_score = calculate_score(user_cards)
+while hit_or_pass == 'h' and user_score < 21:
     print("Your cards:")
     print(f"{user_cards}")
     print(f"Your total: {user_score}\n")
 
     print("Dealer's cards:")
-    print(f"{dealer_cards}")
+    print(f"[ {dealer_cards[0]}, X ]")
+
+    hit_or_pass = input("Would you like to Hit [H] or Pass [P]?: ").lower()
+    if hit_or_pass == 'h':
+        user_cards.append(deal_card())
+    elif hit_or_pass != 'h' and hit_or_pass != 'p':
+        print("Invalid input, pass assumed.")
+    user_score = calculate_score(user_cards)
+
+
+print("\n-------------- FINAL RESULT --------------")
+user_score = calculate_score(user_cards)
+print("Your cards:")
+print(f"{user_cards}")
+print(f"Your total: {user_score}\n")
 
 dealer_score = calculate_score(dealer_cards)
+print(f"{dealer_cards}")
 print(f"Dealer total: {dealer_score}")
-while dealer_score < 17:
+while dealer_score < 17 and user_score < 21:
     print("The dealer's total is less than 17, they must draw a card.")
     dealer_cards.append(deal_card())
     dealer_score = calculate_score(dealer_cards)
     print("Dealer's cards:")
     print(f"{dealer_cards}")
+    print(f"Dealer total: {dealer_score}")
 
-
-if dealer_score < user_score <= 21:
-    print("You win!")
+if user_score == 21:
+    print("\nYou win!")
+elif user_score > 21:
+    print("\nDealer wins!")
+elif dealer_score > 21:
+    print("\nYou win!")
+elif dealer_score < user_score <= 21:
+    print("\nYou win!")
 elif user_score < dealer_score <= 21:
-    print("Dealer wins!")
+    print("\nDealer wins!")
 elif dealer_score == user_score:
-    print("it's a draw!")
+    print("\nit's a draw!")
