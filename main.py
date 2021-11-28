@@ -60,7 +60,6 @@ print(f"Your total: {user_score}\n")
 
 print("Dealer's cards:")
 print(f"[ {dealer_cards[0]}, X ]")
-dealer_score = calculate_score(dealer_cards)
 
 hit_or_pass = "h"
 while hit_or_pass == 'h':
@@ -77,11 +76,15 @@ while hit_or_pass == 'h':
 
     print("Dealer's cards:")
     print(f"{dealer_cards}")
-    dealer_score = calculate_score(dealer_cards)
-    print(f"Dealer's total: {dealer_score}")
 
-    if dealer_score > 21:
-        hit_or_pass = 'p'
+dealer_score = calculate_score(dealer_cards)
+print(f"Dealer total: {dealer_score}")
+while dealer_score < 17:
+    print("The dealer's total is less than 17, they must draw a card.")
+    dealer_cards.append(deal_card())
+    dealer_score = calculate_score(dealer_cards)
+    print("Dealer's cards:")
+    print(f"{dealer_cards}")
 
 
 if dealer_score < user_score <= 21:
