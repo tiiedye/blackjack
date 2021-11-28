@@ -6,10 +6,12 @@ from art import logo
 cards = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"]
 
 
+# returns a random card from the deck
 def deal_card():
     return random.choice(cards)
 
 
+# calculates the total score of the cards in a hand
 def calculate_score(hand):
     score = 0
 
@@ -38,10 +40,9 @@ print("1. The deck is unlimited in size.\n 2. There are no jokers.\n 3. The Jack
 user_cards = []
 dealer_cards = []
 
-user_cards.append(deal_card())
-user_cards.append(deal_card())
-dealer_cards.append(deal_card())
-dealer_cards.append(deal_card())
+for i in range(2):
+    user_cards.append(deal_card())
+    dealer_cards.append(deal_card())
 
 user_score = calculate_score(user_cards)
 hit_or_pass = "h"
