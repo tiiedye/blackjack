@@ -60,4 +60,21 @@ print(f"Your total: {user_score}\n")
 
 print("Dealer's cards:")
 print(f"[ {dealer_cards[0]}, X ]")
+
+hit_or_pass = "h"
+while hit_or_pass == 'h':
+    hit_or_pass = input("Would you like to Hit [H] or Pass [P]?: ").lower()
+    if hit_or_pass == 'h':
+        user_cards.append(deal_card())
+    elif hit_or_pass != 'h' and hit_or_pass != 'p':
+        print("Invalid input, pass assumed.")
+
+print("Your cards:")
+print(f"{user_cards}")
+user_score = calculate_score(user_cards)
+print(f"Your total: {user_score}\n")
+
+print("Dealer's cards:")
+print(f"{dealer_cards}")
 dealer_score = calculate_score(dealer_cards)
+print(f"Dealer's total: {dealer_score}")
