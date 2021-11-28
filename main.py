@@ -20,9 +20,44 @@ def deal_card():
     return random.choice(cards)
 
 
+def calculate_score(hand):
+    score = 0
+
+    if "A" in hand:
+        hand.remove("A")
+        hand.append("A")
+
+    for card in hand:
+        if card == "J" or card == "Q" or card == "K":
+            score += 10
+        elif card == "A" and score + 11 <= 21:
+            score += 11
+        elif card == "A" and score + 11 >= 21:
+            score += 1
+        else:
+            score += card
+
+    return score
+
+
+print(logo)
+print("RULES:")
+print("1. The deck is unlimited in size.\n 2. There are no jokers.\n 3. The Jack/Queen/King all count as 10.\n 4. The "
+      "the Ace can count as 11 or 1.\n 5. Cards marked X are face down\n")
+
 user_cards = []
 dealer_cards = []
 
 user_cards.append(deal_card())
 user_cards.append(deal_card())
 dealer_cards.append(deal_card())
+dealer_cards.append(deal_card())
+
+print("Your cards:")
+print(f"{user_cards}")
+user_score = calculate_score(user_cards)
+print(f"Your total: {user_score}\n")
+
+print("Dealer's cards:")
+print(f"[ {dealer_cards[0]}, X ]")
+dealer_score = calculate_score(dealer_cards)
