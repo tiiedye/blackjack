@@ -53,13 +53,14 @@ user_cards.append(deal_card())
 dealer_cards.append(deal_card())
 dealer_cards.append(deal_card())
 
+user_score = calculate_score(user_cards)
 print("Your cards:")
 print(f"{user_cards}")
-user_score = calculate_score(user_cards)
 print(f"Your total: {user_score}\n")
 
 print("Dealer's cards:")
 print(f"[ {dealer_cards[0]}, X ]")
+dealer_score = calculate_score(dealer_cards)
 
 hit_or_pass = "h"
 while hit_or_pass == 'h':
@@ -69,12 +70,23 @@ while hit_or_pass == 'h':
     elif hit_or_pass != 'h' and hit_or_pass != 'p':
         print("Invalid input, pass assumed.")
 
-print("Your cards:")
-print(f"{user_cards}")
-user_score = calculate_score(user_cards)
-print(f"Your total: {user_score}\n")
+    user_score = calculate_score(user_cards)
+    print("Your cards:")
+    print(f"{user_cards}")
+    print(f"Your total: {user_score}\n")
 
-print("Dealer's cards:")
-print(f"{dealer_cards}")
-dealer_score = calculate_score(dealer_cards)
-print(f"Dealer's total: {dealer_score}")
+    print("Dealer's cards:")
+    print(f"{dealer_cards}")
+    dealer_score = calculate_score(dealer_cards)
+    print(f"Dealer's total: {dealer_score}")
+
+    if dealer_score > 21:
+        hit_or_pass = 'p'
+
+
+if dealer_score < user_score <= 21:
+    print("You win!")
+elif user_score < dealer_score <= 21:
+    print("Dealer wins!")
+elif dealer_score == user_score:
+    print("it's a draw!")
